@@ -1,0 +1,1812 @@
+[
+  {
+    "ann_id": 1,
+    "image_path": "data1/000000000009.jpg",
+    "text_prompt": "bowl"
+  },
+  {
+    "ann_id": 2,
+    "image_path": "data1/000000000009.jpg",
+    "text_prompt": "broccoli"
+  },
+  {
+    "ann_id": 3,
+    "image_path": "data1/000000000009.jpg",
+    "text_prompt": "orange"
+  },
+  {
+    "ann_id": 4,
+    "image_path": "data1/000000000025.jpg",
+    "text_prompt": "giraffe"
+  },
+  {
+    "ann_id": 5,
+    "image_path": "data1/000000000030.jpg",
+    "text_prompt": "potted plant"
+  },
+  {
+    "ann_id": 6,
+    "image_path": "data1/000000000030.jpg",
+    "text_prompt": "vase"
+  },
+  {
+    "ann_id": 7,
+    "image_path": "data1/000000000034.jpg",
+    "text_prompt": "zebra"
+  },
+  {
+    "ann_id": 8,
+    "image_path": "data1/000000000036.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 9,
+    "image_path": "data1/000000000036.jpg",
+    "text_prompt": "umbrella"
+  },
+  {
+    "ann_id": 10,
+    "image_path": "data1/000000000042.jpg",
+    "text_prompt": "dog"
+  },
+  {
+    "ann_id": 11,
+    "image_path": "data1/000000000049.jpg",
+    "text_prompt": "horse"
+  },
+  {
+    "ann_id": 12,
+    "image_path": "data1/000000000049.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 13,
+    "image_path": "data1/000000000049.jpg",
+    "text_prompt": "potted plant"
+  },
+  {
+    "ann_id": 14,
+    "image_path": "data1/000000000061.jpg",
+    "text_prompt": "elephant"
+  },
+  {
+    "ann_id": 15,
+    "image_path": "data1/000000000061.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 16,
+    "image_path": "data1/000000000064.jpg",
+    "text_prompt": "car"
+  },
+  {
+    "ann_id": 17,
+    "image_path": "data1/000000000064.jpg",
+    "text_prompt": "clock"
+  },
+  {
+    "ann_id": 18,
+    "image_path": "data1/000000000064.jpg",
+    "text_prompt": "stop sign"
+  },
+  {
+    "ann_id": 19,
+    "image_path": "data1/000000000064.jpg",
+    "text_prompt": "truck"
+  },
+  {
+    "ann_id": 20,
+    "image_path": "data1/000000000071.jpg",
+    "text_prompt": "car"
+  },
+  {
+    "ann_id": 21,
+    "image_path": "data1/000000000071.jpg",
+    "text_prompt": "train"
+  },
+  {
+    "ann_id": 22,
+    "image_path": "data1/000000000071.jpg",
+    "text_prompt": "truck"
+  },
+  {
+    "ann_id": 23,
+    "image_path": "data1/000000000072.jpg",
+    "text_prompt": "giraffe"
+  },
+  {
+    "ann_id": 24,
+    "image_path": "data1/000000000073.jpg",
+    "text_prompt": "motorcycle"
+  },
+  {
+    "ann_id": 25,
+    "image_path": "data1/000000000074.jpg",
+    "text_prompt": "bicycle"
+  },
+  {
+    "ann_id": 26,
+    "image_path": "data1/000000000074.jpg",
+    "text_prompt": "dog"
+  },
+  {
+    "ann_id": 27,
+    "image_path": "data1/000000000074.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 28,
+    "image_path": "data1/000000000077.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 29,
+    "image_path": "data1/000000000077.jpg",
+    "text_prompt": "skateboard"
+  },
+  {
+    "ann_id": 30,
+    "image_path": "data1/000000000078.jpg",
+    "text_prompt": "clock"
+  },
+  {
+    "ann_id": 31,
+    "image_path": "data1/000000000081.jpg",
+    "text_prompt": "airplane"
+  },
+  {
+    "ann_id": 32,
+    "image_path": "data1/000000000086.jpg",
+    "text_prompt": "handbag"
+  },
+  {
+    "ann_id": 33,
+    "image_path": "data1/000000000086.jpg",
+    "text_prompt": "motorcycle"
+  },
+  {
+    "ann_id": 34,
+    "image_path": "data1/000000000086.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 35,
+    "image_path": "data1/000000000089.jpg",
+    "text_prompt": "book"
+  },
+  {
+    "ann_id": 36,
+    "image_path": "data1/000000000089.jpg",
+    "text_prompt": "knife"
+  },
+  {
+    "ann_id": 37,
+    "image_path": "data1/000000000089.jpg",
+    "text_prompt": "microwave"
+  },
+  {
+    "ann_id": 38,
+    "image_path": "data1/000000000089.jpg",
+    "text_prompt": "oven"
+  },
+  {
+    "ann_id": 39,
+    "image_path": "data1/000000000092.jpg",
+    "text_prompt": "cake"
+  },
+  {
+    "ann_id": 40,
+    "image_path": "data1/000000000092.jpg",
+    "text_prompt": "fork"
+  },
+  {
+    "ann_id": 41,
+    "image_path": "data1/000000000094.jpg",
+    "text_prompt": "car"
+  },
+  {
+    "ann_id": 42,
+    "image_path": "data1/000000000094.jpg",
+    "text_prompt": "truck"
+  },
+  {
+    "ann_id": 43,
+    "image_path": "data1/000000000109.jpg",
+    "text_prompt": "bench"
+  },
+  {
+    "ann_id": 44,
+    "image_path": "data1/000000000109.jpg",
+    "text_prompt": "dog"
+  },
+  {
+    "ann_id": 45,
+    "image_path": "data1/000000000109.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 46,
+    "image_path": "data1/000000000110.jpg",
+    "text_prompt": "chair"
+  },
+  {
+    "ann_id": 47,
+    "image_path": "data1/000000000110.jpg",
+    "text_prompt": "cup"
+  },
+  {
+    "ann_id": 48,
+    "image_path": "data1/000000000110.jpg",
+    "text_prompt": "dining table"
+  },
+  {
+    "ann_id": 49,
+    "image_path": "data1/000000000110.jpg",
+    "text_prompt": "fork"
+  },
+  {
+    "ann_id": 50,
+    "image_path": "data1/000000000110.jpg",
+    "text_prompt": "knife"
+  },
+  {
+    "ann_id": 51,
+    "image_path": "data1/000000000110.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 52,
+    "image_path": "data1/000000000110.jpg",
+    "text_prompt": "pizza"
+  },
+  {
+    "ann_id": 53,
+    "image_path": "data1/000000000113.jpg",
+    "text_prompt": "cake"
+  },
+  {
+    "ann_id": 54,
+    "image_path": "data1/000000000113.jpg",
+    "text_prompt": "chair"
+  },
+  {
+    "ann_id": 55,
+    "image_path": "data1/000000000113.jpg",
+    "text_prompt": "cup"
+  },
+  {
+    "ann_id": 56,
+    "image_path": "data1/000000000113.jpg",
+    "text_prompt": "dining table"
+  },
+  {
+    "ann_id": 57,
+    "image_path": "data1/000000000113.jpg",
+    "text_prompt": "knife"
+  },
+  {
+    "ann_id": 58,
+    "image_path": "data1/000000000113.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 59,
+    "image_path": "data1/000000000127.jpg",
+    "text_prompt": "bench"
+  },
+  {
+    "ann_id": 60,
+    "image_path": "data1/000000000127.jpg",
+    "text_prompt": "book"
+  },
+  {
+    "ann_id": 61,
+    "image_path": "data1/000000000127.jpg",
+    "text_prompt": "cake"
+  },
+  {
+    "ann_id": 62,
+    "image_path": "data1/000000000127.jpg",
+    "text_prompt": "cup"
+  },
+  {
+    "ann_id": 63,
+    "image_path": "data1/000000000127.jpg",
+    "text_prompt": "dining table"
+  },
+  {
+    "ann_id": 64,
+    "image_path": "data1/000000000127.jpg",
+    "text_prompt": "handbag"
+  },
+  {
+    "ann_id": 65,
+    "image_path": "data1/000000000127.jpg",
+    "text_prompt": "knife"
+  },
+  {
+    "ann_id": 66,
+    "image_path": "data1/000000000127.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 67,
+    "image_path": "data1/000000000127.jpg",
+    "text_prompt": "potted plant"
+  },
+  {
+    "ann_id": 68,
+    "image_path": "data1/000000000127.jpg",
+    "text_prompt": "spoon"
+  },
+  {
+    "ann_id": 69,
+    "image_path": "data1/000000000127.jpg",
+    "text_prompt": "umbrella"
+  },
+  {
+    "ann_id": 70,
+    "image_path": "data1/000000000133.jpg",
+    "text_prompt": "bed"
+  },
+  {
+    "ann_id": 71,
+    "image_path": "data1/000000000133.jpg",
+    "text_prompt": "teddy bear"
+  },
+  {
+    "ann_id": 72,
+    "image_path": "data1/000000000136.jpg",
+    "text_prompt": "giraffe"
+  },
+  {
+    "ann_id": 73,
+    "image_path": "data1/000000000136.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 74,
+    "image_path": "data1/000000000138.jpg",
+    "text_prompt": "bowl"
+  },
+  {
+    "ann_id": 75,
+    "image_path": "data1/000000000138.jpg",
+    "text_prompt": "clock"
+  },
+  {
+    "ann_id": 76,
+    "image_path": "data1/000000000138.jpg",
+    "text_prompt": "oven"
+  },
+  {
+    "ann_id": 77,
+    "image_path": "data1/000000000138.jpg",
+    "text_prompt": "potted plant"
+  },
+  {
+    "ann_id": 78,
+    "image_path": "data1/000000000138.jpg",
+    "text_prompt": "refrigerator"
+  },
+  {
+    "ann_id": 79,
+    "image_path": "data1/000000000138.jpg",
+    "text_prompt": "sink"
+  },
+  {
+    "ann_id": 80,
+    "image_path": "data1/000000000138.jpg",
+    "text_prompt": "vase"
+  },
+  {
+    "ann_id": 81,
+    "image_path": "data1/000000000142.jpg",
+    "text_prompt": "banana"
+  },
+  {
+    "ann_id": 82,
+    "image_path": "data1/000000000142.jpg",
+    "text_prompt": "bottle"
+  },
+  {
+    "ann_id": 83,
+    "image_path": "data1/000000000142.jpg",
+    "text_prompt": "dining table"
+  },
+  {
+    "ann_id": 84,
+    "image_path": "data1/000000000142.jpg",
+    "text_prompt": "sandwich"
+  },
+  {
+    "ann_id": 85,
+    "image_path": "data1/000000000143.jpg",
+    "text_prompt": "bird"
+  },
+  {
+    "ann_id": 86,
+    "image_path": "data1/000000000144.jpg",
+    "text_prompt": "giraffe"
+  },
+  {
+    "ann_id": 87,
+    "image_path": "data1/000000000149.jpg",
+    "text_prompt": "car"
+  },
+  {
+    "ann_id": 88,
+    "image_path": "data1/000000000149.jpg",
+    "text_prompt": "kite"
+  },
+  {
+    "ann_id": 89,
+    "image_path": "data1/000000000149.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 90,
+    "image_path": "data1/000000000151.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 91,
+    "image_path": "data1/000000000151.jpg",
+    "text_prompt": "stop sign"
+  },
+  {
+    "ann_id": 92,
+    "image_path": "data1/000000000151.jpg",
+    "text_prompt": "train"
+  },
+  {
+    "ann_id": 93,
+    "image_path": "data1/000000000154.jpg",
+    "text_prompt": "zebra"
+  },
+  {
+    "ann_id": 94,
+    "image_path": "data1/000000000164.jpg",
+    "text_prompt": "bottle"
+  },
+  {
+    "ann_id": 95,
+    "image_path": "data1/000000000164.jpg",
+    "text_prompt": "bowl"
+  },
+  {
+    "ann_id": 96,
+    "image_path": "data1/000000000164.jpg",
+    "text_prompt": "chair"
+  },
+  {
+    "ann_id": 97,
+    "image_path": "data1/000000000164.jpg",
+    "text_prompt": "cup"
+  },
+  {
+    "ann_id": 98,
+    "image_path": "data1/000000000164.jpg",
+    "text_prompt": "dining table"
+  },
+  {
+    "ann_id": 99,
+    "image_path": "data1/000000000164.jpg",
+    "text_prompt": "microwave"
+  },
+  {
+    "ann_id": 100,
+    "image_path": "data1/000000000164.jpg",
+    "text_prompt": "oven"
+  },
+  {
+    "ann_id": 101,
+    "image_path": "data1/000000000164.jpg",
+    "text_prompt": "refrigerator"
+  },
+  {
+    "ann_id": 102,
+    "image_path": "data1/000000000164.jpg",
+    "text_prompt": "wine glass"
+  },
+  {
+    "ann_id": 103,
+    "image_path": "data1/000000000165.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 104,
+    "image_path": "data1/000000000165.jpg",
+    "text_prompt": "scissors"
+  },
+  {
+    "ann_id": 105,
+    "image_path": "data1/000000000165.jpg",
+    "text_prompt": "tie"
+  },
+  {
+    "ann_id": 106,
+    "image_path": "data1/000000000192.jpg",
+    "text_prompt": "baseball bat"
+  },
+  {
+    "ann_id": 107,
+    "image_path": "data1/000000000192.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 108,
+    "image_path": "data1/000000000194.jpg",
+    "text_prompt": "knife"
+  },
+  {
+    "ann_id": 109,
+    "image_path": "data1/000000000194.jpg",
+    "text_prompt": "pizza"
+  },
+  {
+    "ann_id": 110,
+    "image_path": "data1/000000000196.jpg",
+    "text_prompt": "bowl"
+  },
+  {
+    "ann_id": 111,
+    "image_path": "data1/000000000196.jpg",
+    "text_prompt": "broccoli"
+  },
+  {
+    "ann_id": 112,
+    "image_path": "data1/000000000196.jpg",
+    "text_prompt": "carrot"
+  },
+  {
+    "ann_id": 113,
+    "image_path": "data1/000000000196.jpg",
+    "text_prompt": "dining table"
+  },
+  {
+    "ann_id": 114,
+    "image_path": "data1/000000000196.jpg",
+    "text_prompt": "fork"
+  },
+  {
+    "ann_id": 115,
+    "image_path": "data1/000000000196.jpg",
+    "text_prompt": "spoon"
+  },
+  {
+    "ann_id": 116,
+    "image_path": "data1/000000000201.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 117,
+    "image_path": "data1/000000000201.jpg",
+    "text_prompt": "snowboard"
+  },
+  {
+    "ann_id": 118,
+    "image_path": "data2/000000000208.jpg",
+    "text_prompt": "sink"
+  },
+  {
+    "ann_id": 119,
+    "image_path": "data2/000000000208.jpg",
+    "text_prompt": "toothbrush"
+  },
+  {
+    "ann_id": 120,
+    "image_path": "data2/000000000241.jpg",
+    "text_prompt": "bottle"
+  },
+  {
+    "ann_id": 121,
+    "image_path": "data2/000000000241.jpg",
+    "text_prompt": "couch"
+  },
+  {
+    "ann_id": 122,
+    "image_path": "data2/000000000241.jpg",
+    "text_prompt": "cup"
+  },
+  {
+    "ann_id": 123,
+    "image_path": "data2/000000000241.jpg",
+    "text_prompt": "handbag"
+  },
+  {
+    "ann_id": 124,
+    "image_path": "data2/000000000241.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 125,
+    "image_path": "data2/000000000241.jpg",
+    "text_prompt": "potted plant"
+  },
+  {
+    "ann_id": 126,
+    "image_path": "data2/000000000241.jpg",
+    "text_prompt": "remote"
+  },
+  {
+    "ann_id": 127,
+    "image_path": "data2/000000000247.jpg",
+    "text_prompt": "airplane"
+  },
+  {
+    "ann_id": 128,
+    "image_path": "data2/000000000247.jpg",
+    "text_prompt": "car"
+  },
+  {
+    "ann_id": 129,
+    "image_path": "data2/000000000257.jpg",
+    "text_prompt": "backpack"
+  },
+  {
+    "ann_id": 130,
+    "image_path": "data2/000000000257.jpg",
+    "text_prompt": "handbag"
+  },
+  {
+    "ann_id": 131,
+    "image_path": "data2/000000000257.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 132,
+    "image_path": "data2/000000000257.jpg",
+    "text_prompt": "traffic light"
+  },
+  {
+    "ann_id": 133,
+    "image_path": "data2/000000000257.jpg",
+    "text_prompt": "truck"
+  },
+  {
+    "ann_id": 134,
+    "image_path": "data2/000000000260.jpg",
+    "text_prompt": "bus"
+  },
+  {
+    "ann_id": 135,
+    "image_path": "data2/000000000260.jpg",
+    "text_prompt": "car"
+  },
+  {
+    "ann_id": 136,
+    "image_path": "data2/000000000260.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 137,
+    "image_path": "data2/000000000260.jpg",
+    "text_prompt": "suitcase"
+  },
+  {
+    "ann_id": 138,
+    "image_path": "data2/000000000263.jpg",
+    "text_prompt": "elephant"
+  },
+  {
+    "ann_id": 139,
+    "image_path": "data2/000000000283.jpg",
+    "text_prompt": "bottle"
+  },
+  {
+    "ann_id": 140,
+    "image_path": "data2/000000000283.jpg",
+    "text_prompt": "chair"
+  },
+  {
+    "ann_id": 141,
+    "image_path": "data2/000000000283.jpg",
+    "text_prompt": "dining table"
+  },
+  {
+    "ann_id": 142,
+    "image_path": "data2/000000000283.jpg",
+    "text_prompt": "wine glass"
+  },
+  {
+    "ann_id": 143,
+    "image_path": "data2/000000000294.jpg",
+    "text_prompt": "clock"
+  },
+  {
+    "ann_id": 144,
+    "image_path": "data2/000000000294.jpg",
+    "text_prompt": "fork"
+  },
+  {
+    "ann_id": 145,
+    "image_path": "data2/000000000294.jpg",
+    "text_prompt": "knife"
+  },
+  {
+    "ann_id": 146,
+    "image_path": "data2/000000000294.jpg",
+    "text_prompt": "microwave"
+  },
+  {
+    "ann_id": 147,
+    "image_path": "data2/000000000294.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 148,
+    "image_path": "data2/000000000294.jpg",
+    "text_prompt": "spoon"
+  },
+  {
+    "ann_id": 149,
+    "image_path": "data2/000000000307.jpg",
+    "text_prompt": "car"
+  },
+  {
+    "ann_id": 150,
+    "image_path": "data2/000000000307.jpg",
+    "text_prompt": "dog"
+  },
+  {
+    "ann_id": 151,
+    "image_path": "data2/000000000307.jpg",
+    "text_prompt": "frisbee"
+  },
+  {
+    "ann_id": 152,
+    "image_path": "data2/000000000308.jpg",
+    "text_prompt": "clock"
+  },
+  {
+    "ann_id": 153,
+    "image_path": "data2/000000000308.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 154,
+    "image_path": "data2/000000000308.jpg",
+    "text_prompt": "umbrella"
+  },
+  {
+    "ann_id": 155,
+    "image_path": "data2/000000000308.jpg",
+    "text_prompt": "wine glass"
+  },
+  {
+    "ann_id": 156,
+    "image_path": "data2/000000000309.jpg",
+    "text_prompt": "dog"
+  },
+  {
+    "ann_id": 157,
+    "image_path": "data2/000000000309.jpg",
+    "text_prompt": "teddy bear"
+  },
+  {
+    "ann_id": 158,
+    "image_path": "data2/000000000312.jpg",
+    "text_prompt": "elephant"
+  },
+  {
+    "ann_id": 159,
+    "image_path": "data2/000000000315.jpg",
+    "text_prompt": "chair"
+  },
+  {
+    "ann_id": 160,
+    "image_path": "data2/000000000315.jpg",
+    "text_prompt": "handbag"
+  },
+  {
+    "ann_id": 161,
+    "image_path": "data2/000000000315.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 162,
+    "image_path": "data2/000000000315.jpg",
+    "text_prompt": "umbrella"
+  },
+  {
+    "ann_id": 163,
+    "image_path": "data2/000000000321.jpg",
+    "text_prompt": "hot dog"
+  },
+  {
+    "ann_id": 164,
+    "image_path": "data2/000000000321.jpg",
+    "text_prompt": "sandwich"
+  },
+  {
+    "ann_id": 165,
+    "image_path": "data2/000000000322.jpg",
+    "text_prompt": "frisbee"
+  },
+  {
+    "ann_id": 166,
+    "image_path": "data2/000000000322.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 167,
+    "image_path": "data2/000000000326.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 168,
+    "image_path": "data2/000000000326.jpg",
+    "text_prompt": "wine glass"
+  },
+  {
+    "ann_id": 169,
+    "image_path": "data2/000000000328.jpg",
+    "text_prompt": "backpack"
+  },
+  {
+    "ann_id": 170,
+    "image_path": "data2/000000000328.jpg",
+    "text_prompt": "bench"
+  },
+  {
+    "ann_id": 171,
+    "image_path": "data2/000000000328.jpg",
+    "text_prompt": "book"
+  },
+  {
+    "ann_id": 172,
+    "image_path": "data2/000000000328.jpg",
+    "text_prompt": "car"
+  },
+  {
+    "ann_id": 173,
+    "image_path": "data2/000000000328.jpg",
+    "text_prompt": "cell phone"
+  },
+  {
+    "ann_id": 174,
+    "image_path": "data2/000000000328.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 175,
+    "image_path": "data2/000000000328.jpg",
+    "text_prompt": "tie"
+  },
+  {
+    "ann_id": 176,
+    "image_path": "data2/000000000332.jpg",
+    "text_prompt": "bowl"
+  },
+  {
+    "ann_id": 177,
+    "image_path": "data2/000000000332.jpg",
+    "text_prompt": "carrot"
+  },
+  {
+    "ann_id": 178,
+    "image_path": "data2/000000000332.jpg",
+    "text_prompt": "cup"
+  },
+  {
+    "ann_id": 179,
+    "image_path": "data2/000000000332.jpg",
+    "text_prompt": "fork"
+  },
+  {
+    "ann_id": 180,
+    "image_path": "data2/000000000338.jpg",
+    "text_prompt": "clock"
+  },
+  {
+    "ann_id": 181,
+    "image_path": "data2/000000000338.jpg",
+    "text_prompt": "handbag"
+  },
+  {
+    "ann_id": 182,
+    "image_path": "data2/000000000338.jpg",
+    "text_prompt": "oven"
+  },
+  {
+    "ann_id": 183,
+    "image_path": "data2/000000000338.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 184,
+    "image_path": "data2/000000000338.jpg",
+    "text_prompt": "refrigerator"
+  },
+  {
+    "ann_id": 185,
+    "image_path": "data2/000000000349.jpg",
+    "text_prompt": "potted plant"
+  },
+  {
+    "ann_id": 186,
+    "image_path": "data2/000000000349.jpg",
+    "text_prompt": "train"
+  },
+  {
+    "ann_id": 187,
+    "image_path": "data2/000000000357.jpg",
+    "text_prompt": "baseball bat"
+  },
+  {
+    "ann_id": 188,
+    "image_path": "data2/000000000357.jpg",
+    "text_prompt": "baseball glove"
+  },
+  {
+    "ann_id": 189,
+    "image_path": "data2/000000000357.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 190,
+    "image_path": "data2/000000000359.jpg",
+    "text_prompt": "car"
+  },
+  {
+    "ann_id": 191,
+    "image_path": "data2/000000000359.jpg",
+    "text_prompt": "traffic light"
+  },
+  {
+    "ann_id": 192,
+    "image_path": "data2/000000000360.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 193,
+    "image_path": "data2/000000000360.jpg",
+    "text_prompt": "snowboard"
+  },
+  {
+    "ann_id": 194,
+    "image_path": "data2/000000000368.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 195,
+    "image_path": "data2/000000000368.jpg",
+    "text_prompt": "sports ball"
+  },
+  {
+    "ann_id": 196,
+    "image_path": "data2/000000000370.jpg",
+    "text_prompt": "broccoli"
+  },
+  {
+    "ann_id": 197,
+    "image_path": "data2/000000000370.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 198,
+    "image_path": "data2/000000000382.jpg",
+    "text_prompt": "backpack"
+  },
+  {
+    "ann_id": 199,
+    "image_path": "data2/000000000382.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 200,
+    "image_path": "data2/000000000382.jpg",
+    "text_prompt": "skis"
+  },
+  {
+    "ann_id": 201,
+    "image_path": "data2/000000000384.jpg",
+    "text_prompt": "book"
+  },
+  {
+    "ann_id": 202,
+    "image_path": "data2/000000000384.jpg",
+    "text_prompt": "clock"
+  },
+  {
+    "ann_id": 203,
+    "image_path": "data2/000000000384.jpg",
+    "text_prompt": "couch"
+  },
+  {
+    "ann_id": 204,
+    "image_path": "data2/000000000384.jpg",
+    "text_prompt": "laptop"
+  },
+  {
+    "ann_id": 205,
+    "image_path": "data2/000000000384.jpg",
+    "text_prompt": "mouse"
+  },
+  {
+    "ann_id": 206,
+    "image_path": "data2/000000000384.jpg",
+    "text_prompt": "remote"
+  },
+  {
+    "ann_id": 207,
+    "image_path": "data2/000000000387.jpg",
+    "text_prompt": "cell phone"
+  },
+  {
+    "ann_id": 208,
+    "image_path": "data2/000000000387.jpg",
+    "text_prompt": "laptop"
+  },
+  {
+    "ann_id": 209,
+    "image_path": "data2/000000000389.jpg",
+    "text_prompt": "backpack"
+  },
+  {
+    "ann_id": 210,
+    "image_path": "data2/000000000389.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 211,
+    "image_path": "data2/000000000389.jpg",
+    "text_prompt": "tie"
+  },
+  {
+    "ann_id": 212,
+    "image_path": "data2/000000000394.jpg",
+    "text_prompt": "dog"
+  },
+  {
+    "ann_id": 213,
+    "image_path": "data2/000000000394.jpg",
+    "text_prompt": "frisbee"
+  },
+  {
+    "ann_id": 214,
+    "image_path": "data2/000000000395.jpg",
+    "text_prompt": "cell phone"
+  },
+  {
+    "ann_id": 215,
+    "image_path": "data2/000000000395.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 216,
+    "image_path": "data2/000000000397.jpg",
+    "text_prompt": "chair"
+  },
+  {
+    "ann_id": 217,
+    "image_path": "data2/000000000397.jpg",
+    "text_prompt": "cup"
+  },
+  {
+    "ann_id": 218,
+    "image_path": "data2/000000000397.jpg",
+    "text_prompt": "dining table"
+  },
+  {
+    "ann_id": 219,
+    "image_path": "data2/000000000397.jpg",
+    "text_prompt": "fork"
+  },
+  {
+    "ann_id": 220,
+    "image_path": "data2/000000000397.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 221,
+    "image_path": "data2/000000000397.jpg",
+    "text_prompt": "pizza"
+  },
+  {
+    "ann_id": 222,
+    "image_path": "data2/000000000400.jpg",
+    "text_prompt": "boat"
+  },
+  {
+    "ann_id": 223,
+    "image_path": "data2/000000000400.jpg",
+    "text_prompt": "dog"
+  },
+  {
+    "ann_id": 224,
+    "image_path": "data2/000000000404.jpg",
+    "text_prompt": "boat"
+  },
+  {
+    "ann_id": 225,
+    "image_path": "data2/000000000415.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 226,
+    "image_path": "data2/000000000415.jpg",
+    "text_prompt": "tennis racket"
+  },
+  {
+    "ann_id": 227,
+    "image_path": "data2/000000000419.jpg",
+    "text_prompt": "car"
+  },
+  {
+    "ann_id": 228,
+    "image_path": "data2/000000000419.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 229,
+    "image_path": "data2/000000000419.jpg",
+    "text_prompt": "sports ball"
+  },
+  {
+    "ann_id": 230,
+    "image_path": "data2/000000000419.jpg",
+    "text_prompt": "tennis racket"
+  },
+  {
+    "ann_id": 231,
+    "image_path": "data2/000000000428.jpg",
+    "text_prompt": "cake"
+  },
+  {
+    "ann_id": 232,
+    "image_path": "data2/000000000428.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 233,
+    "image_path": "data2/000000000428.jpg",
+    "text_prompt": "tie"
+  },
+  {
+    "ann_id": 234,
+    "image_path": "data2/000000000431.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 235,
+    "image_path": "data2/000000000431.jpg",
+    "text_prompt": "sports ball"
+  },
+  {
+    "ann_id": 236,
+    "image_path": "data2/000000000431.jpg",
+    "text_prompt": "tennis racket"
+  },
+  {
+    "ann_id": 237,
+    "image_path": "data2/000000000436.jpg",
+    "text_prompt": "donut"
+  },
+  {
+    "ann_id": 238,
+    "image_path": "data2/000000000436.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 239,
+    "image_path": "data2/000000000438.jpg",
+    "text_prompt": "donut"
+  },
+  {
+    "ann_id": 240,
+    "image_path": "data2/000000000443.jpg",
+    "text_prompt": "cat"
+  },
+  {
+    "ann_id": 241,
+    "image_path": "data2/000000000443.jpg",
+    "text_prompt": "couch"
+  },
+  {
+    "ann_id": 242,
+    "image_path": "data2/000000000443.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 243,
+    "image_path": "data2/000000000443.jpg",
+    "text_prompt": "remote"
+  },
+  {
+    "ann_id": 244,
+    "image_path": "data2/000000000446.jpg",
+    "text_prompt": "book"
+  },
+  {
+    "ann_id": 245,
+    "image_path": "data2/000000000446.jpg",
+    "text_prompt": "couch"
+  },
+  {
+    "ann_id": 246,
+    "image_path": "data2/000000000446.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 247,
+    "image_path": "data2/000000000446.jpg",
+    "text_prompt": "potted plant"
+  },
+  {
+    "ann_id": 248,
+    "image_path": "data2/000000000446.jpg",
+    "text_prompt": "remote"
+  },
+  {
+    "ann_id": 249,
+    "image_path": "data2/000000000450.jpg",
+    "text_prompt": "cup"
+  },
+  {
+    "ann_id": 250,
+    "image_path": "data2/000000000450.jpg",
+    "text_prompt": "dining table"
+  },
+  {
+    "ann_id": 251,
+    "image_path": "data2/000000000450.jpg",
+    "text_prompt": "pizza"
+  },
+  {
+    "ann_id": 252,
+    "image_path": "data2/000000000450.jpg",
+    "text_prompt": "wine glass"
+  },
+  {
+    "ann_id": 253,
+    "image_path": "data2/000000000459.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 254,
+    "image_path": "data2/000000000459.jpg",
+    "text_prompt": "tie"
+  },
+  {
+    "ann_id": 255,
+    "image_path": "data2/000000000471.jpg",
+    "text_prompt": "bus"
+  },
+  {
+    "ann_id": 256,
+    "image_path": "data2/000000000471.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 257,
+    "image_path": "data2/000000000472.jpg",
+    "text_prompt": "airplane"
+  },
+  {
+    "ann_id": 258,
+    "image_path": "data2/000000000474.jpg",
+    "text_prompt": "baseball glove"
+  },
+  {
+    "ann_id": 259,
+    "image_path": "data2/000000000474.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 260,
+    "image_path": "data2/000000000486.jpg",
+    "text_prompt": "bottle"
+  },
+  {
+    "ann_id": 261,
+    "image_path": "data2/000000000486.jpg",
+    "text_prompt": "bowl"
+  },
+  {
+    "ann_id": 262,
+    "image_path": "data2/000000000486.jpg",
+    "text_prompt": "knife"
+  },
+  {
+    "ann_id": 263,
+    "image_path": "data2/000000000486.jpg",
+    "text_prompt": "oven"
+  },
+  {
+    "ann_id": 264,
+    "image_path": "data2/000000000486.jpg",
+    "text_prompt": "refrigerator"
+  },
+  {
+    "ann_id": 265,
+    "image_path": "data2/000000000488.jpg",
+    "text_prompt": "baseball bat"
+  },
+  {
+    "ann_id": 266,
+    "image_path": "data2/000000000488.jpg",
+    "text_prompt": "baseball glove"
+  },
+  {
+    "ann_id": 267,
+    "image_path": "data2/000000000488.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 268,
+    "image_path": "data2/000000000488.jpg",
+    "text_prompt": "sports ball"
+  },
+  {
+    "ann_id": 269,
+    "image_path": "data2/000000000490.jpg",
+    "text_prompt": "dog"
+  },
+  {
+    "ann_id": 270,
+    "image_path": "data2/000000000490.jpg",
+    "text_prompt": "skateboard"
+  },
+  {
+    "ann_id": 271,
+    "image_path": "data2/000000000491.jpg",
+    "text_prompt": "teddy bear"
+  },
+  {
+    "ann_id": 272,
+    "image_path": "data2/000000000502.jpg",
+    "text_prompt": "bear"
+  },
+  {
+    "ann_id": 273,
+    "image_path": "data2/000000000510.jpg",
+    "text_prompt": "bench"
+  },
+  {
+    "ann_id": 274,
+    "image_path": "data2/000000000510.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 275,
+    "image_path": "data2/000000000510.jpg",
+    "text_prompt": "traffic light"
+  },
+  {
+    "ann_id": 276,
+    "image_path": "data2/000000000514.jpg",
+    "text_prompt": "bed"
+  },
+  {
+    "ann_id": 277,
+    "image_path": "data2/000000000520.jpg",
+    "text_prompt": "bird"
+  },
+  {
+    "ann_id": 278,
+    "image_path": "data2/000000000520.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 279,
+    "image_path": "data2/000000000529.jpg",
+    "text_prompt": "motorcycle"
+  },
+  {
+    "ann_id": 280,
+    "image_path": "data2/000000000529.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 281,
+    "image_path": "data2/000000000531.jpg",
+    "text_prompt": "bicycle"
+  },
+  {
+    "ann_id": 282,
+    "image_path": "data2/000000000531.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 283,
+    "image_path": "data2/000000000531.jpg",
+    "text_prompt": "sports ball"
+  },
+  {
+    "ann_id": 284,
+    "image_path": "data2/000000000531.jpg",
+    "text_prompt": "tennis racket"
+  },
+  {
+    "ann_id": 285,
+    "image_path": "data2/000000000532.jpg",
+    "text_prompt": "bus"
+  },
+  {
+    "ann_id": 286,
+    "image_path": "data2/000000000532.jpg",
+    "text_prompt": "handbag"
+  },
+  {
+    "ann_id": 287,
+    "image_path": "data2/000000000532.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 288,
+    "image_path": "data2/000000000536.jpg",
+    "text_prompt": "cell phone"
+  },
+  {
+    "ann_id": 289,
+    "image_path": "data2/000000000536.jpg",
+    "text_prompt": "chair"
+  },
+  {
+    "ann_id": 290,
+    "image_path": "data2/000000000536.jpg",
+    "text_prompt": "handbag"
+  },
+  {
+    "ann_id": 291,
+    "image_path": "data2/000000000536.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 292,
+    "image_path": "data2/000000000540.jpg",
+    "text_prompt": "airplane"
+  },
+  {
+    "ann_id": 293,
+    "image_path": "data2/000000000540.jpg",
+    "text_prompt": "bus"
+  },
+  {
+    "ann_id": 294,
+    "image_path": "data2/000000000540.jpg",
+    "text_prompt": "car"
+  },
+  {
+    "ann_id": 295,
+    "image_path": "data2/000000000540.jpg",
+    "text_prompt": "traffic light"
+  },
+  {
+    "ann_id": 296,
+    "image_path": "data2/000000000540.jpg",
+    "text_prompt": "truck"
+  },
+  {
+    "ann_id": 297,
+    "image_path": "data2/000000000542.jpg",
+    "text_prompt": "airplane"
+  },
+  {
+    "ann_id": 298,
+    "image_path": "data2/000000000542.jpg",
+    "text_prompt": "handbag"
+  },
+  {
+    "ann_id": 299,
+    "image_path": "data2/000000000542.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 300,
+    "image_path": "data2/000000000542.jpg",
+    "text_prompt": "tie"
+  },
+  {
+    "ann_id": 301,
+    "image_path": "data2/000000000544.jpg",
+    "text_prompt": "baseball bat"
+  },
+  {
+    "ann_id": 302,
+    "image_path": "data2/000000000544.jpg",
+    "text_prompt": "baseball glove"
+  },
+  {
+    "ann_id": 303,
+    "image_path": "data2/000000000544.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 304,
+    "image_path": "data2/000000000544.jpg",
+    "text_prompt": "sports ball"
+  },
+  {
+    "ann_id": 305,
+    "image_path": "data2/000000000560.jpg",
+    "text_prompt": "cell phone"
+  },
+  {
+    "ann_id": 306,
+    "image_path": "data2/000000000560.jpg",
+    "text_prompt": "potted plant"
+  },
+  {
+    "ann_id": 307,
+    "image_path": "data2/000000000560.jpg",
+    "text_prompt": "sink"
+  },
+  {
+    "ann_id": 308,
+    "image_path": "data2/000000000560.jpg",
+    "text_prompt": "toilet"
+  },
+  {
+    "ann_id": 309,
+    "image_path": "data2/000000000562.jpg",
+    "text_prompt": "cup"
+  },
+  {
+    "ann_id": 310,
+    "image_path": "data2/000000000562.jpg",
+    "text_prompt": "toothbrush"
+  },
+  {
+    "ann_id": 311,
+    "image_path": "data2/000000000564.jpg",
+    "text_prompt": "chair"
+  },
+  {
+    "ann_id": 312,
+    "image_path": "data2/000000000564.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 313,
+    "image_path": "data2/000000000564.jpg",
+    "text_prompt": "tennis racket"
+  },
+  {
+    "ann_id": 314,
+    "image_path": "data2/000000000569.jpg",
+    "text_prompt": "kite"
+  },
+  {
+    "ann_id": 315,
+    "image_path": "data2/000000000569.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 316,
+    "image_path": "data2/000000000572.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 317,
+    "image_path": "data2/000000000572.jpg",
+    "text_prompt": "suitcase"
+  },
+  {
+    "ann_id": 318,
+    "image_path": "data2/000000000575.jpg",
+    "text_prompt": "cat"
+  },
+  {
+    "ann_id": 319,
+    "image_path": "data2/000000000581.jpg",
+    "text_prompt": "dog"
+  },
+  {
+    "ann_id": 320,
+    "image_path": "data2/000000000584.jpg",
+    "text_prompt": "bowl"
+  },
+  {
+    "ann_id": 321,
+    "image_path": "data2/000000000584.jpg",
+    "text_prompt": "broccoli"
+  },
+  {
+    "ann_id": 322,
+    "image_path": "data2/000000000584.jpg",
+    "text_prompt": "carrot"
+  },
+  {
+    "ann_id": 323,
+    "image_path": "data2/000000000584.jpg",
+    "text_prompt": "spoon"
+  },
+  {
+    "ann_id": 324,
+    "image_path": "data2/000000000589.jpg",
+    "text_prompt": "frisbee"
+  },
+  {
+    "ann_id": 325,
+    "image_path": "data2/000000000589.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 326,
+    "image_path": "data2/000000000590.jpg",
+    "text_prompt": "bowl"
+  },
+  {
+    "ann_id": 327,
+    "image_path": "data2/000000000590.jpg",
+    "text_prompt": "sink"
+  },
+  {
+    "ann_id": 328,
+    "image_path": "data2/000000000595.jpg",
+    "text_prompt": "tv"
+  },
+  {
+    "ann_id": 329,
+    "image_path": "data2/000000000597.jpg",
+    "text_prompt": "elephant"
+  },
+  {
+    "ann_id": 330,
+    "image_path": "data2/000000000599.jpg",
+    "text_prompt": "cat"
+  },
+  {
+    "ann_id": 331,
+    "image_path": "data2/000000000599.jpg",
+    "text_prompt": "couch"
+  },
+  {
+    "ann_id": 332,
+    "image_path": "data2/000000000599.jpg",
+    "text_prompt": "potted plant"
+  },
+  {
+    "ann_id": 333,
+    "image_path": "data2/000000000599.jpg",
+    "text_prompt": "remote"
+  },
+  {
+    "ann_id": 334,
+    "image_path": "data2/000000000605.jpg",
+    "text_prompt": "cup"
+  },
+  {
+    "ann_id": 335,
+    "image_path": "data2/000000000605.jpg",
+    "text_prompt": "dining table"
+  },
+  {
+    "ann_id": 336,
+    "image_path": "data2/000000000605.jpg",
+    "text_prompt": "spoon"
+  },
+  {
+    "ann_id": 337,
+    "image_path": "data2/000000000612.jpg",
+    "text_prompt": "bed"
+  },
+  {
+    "ann_id": 338,
+    "image_path": "data2/000000000612.jpg",
+    "text_prompt": "teddy bear"
+  },
+  {
+    "ann_id": 339,
+    "image_path": "data2/000000000620.jpg",
+    "text_prompt": "pizza"
+  },
+  {
+    "ann_id": 340,
+    "image_path": "data2/000000000620.jpg",
+    "text_prompt": "refrigerator"
+  },
+  {
+    "ann_id": 341,
+    "image_path": "data2/000000000623.jpg",
+    "text_prompt": "bench"
+  },
+  {
+    "ann_id": 342,
+    "image_path": "data2/000000000623.jpg",
+    "text_prompt": "chair"
+  },
+  {
+    "ann_id": 343,
+    "image_path": "data2/000000000623.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 344,
+    "image_path": "data2/000000000623.jpg",
+    "text_prompt": "teddy bear"
+  },
+  {
+    "ann_id": 345,
+    "image_path": "data2/000000000625.jpg",
+    "text_prompt": "frisbee"
+  },
+  {
+    "ann_id": 346,
+    "image_path": "data2/000000000625.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 347,
+    "image_path": "data2/000000000626.jpg",
+    "text_prompt": "clock"
+  },
+  {
+    "ann_id": 348,
+    "image_path": "data2/000000000629.jpg",
+    "text_prompt": "motorcycle"
+  },
+  {
+    "ann_id": 349,
+    "image_path": "data2/000000000634.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 350,
+    "image_path": "data2/000000000634.jpg",
+    "text_prompt": "skateboard"
+  },
+  {
+    "ann_id": 351,
+    "image_path": "data2/000000000636.jpg",
+    "text_prompt": "toilet"
+  },
+  {
+    "ann_id": 352,
+    "image_path": "data2/000000000641.jpg",
+    "text_prompt": "bicycle"
+  },
+  {
+    "ann_id": 353,
+    "image_path": "data2/000000000641.jpg",
+    "text_prompt": "bus"
+  },
+  {
+    "ann_id": 354,
+    "image_path": "data2/000000000641.jpg",
+    "text_prompt": "person"
+  },
+  {
+    "ann_id": 355,
+    "image_path": "data2/000000000643.jpg",
+    "text_prompt": "book"
+  },
+  {
+    "ann_id": 356,
+    "image_path": "data2/000000000643.jpg",
+    "text_prompt": "bottle"
+  },
+  {
+    "ann_id": 357,
+    "image_path": "data2/000000000643.jpg",
+    "text_prompt": "bowl"
+  },
+  {
+    "ann_id": 358,
+    "image_path": "data2/000000000643.jpg",
+    "text_prompt": "mouse"
+  },
+  {
+    "ann_id": 359,
+    "image_path": "data2/000000000643.jpg",
+    "text_prompt": "teddy bear"
+  },
+  {
+    "ann_id": 360,
+    "image_path": "data2/000000000643.jpg",
+    "text_prompt": "tv"
+  },
+  {
+    "ann_id": 361,
+    "image_path": "data2/000000000650.jpg",
+    "text_prompt": "car"
+  },
+  {
+    "ann_id": 362,
+    "image_path": "data2/000000000650.jpg",
+    "text_prompt": "cat"
+  }
+]

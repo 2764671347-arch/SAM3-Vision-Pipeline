@@ -1,0 +1,13 @@
+torch
+torchvision
+numpy==1.26
+pillow
+timm>=1.0.17
+ftfy==6.1.1
+regex
+iopath>=0.1.10
+typing_extensions
+huggingface_hub
+einops
+pycocotools
+# 可选：如果要统计 .safetensors 权重，请额外安装 safetensors

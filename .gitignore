@@ -1,0 +1,26 @@
+# 忽略 Python 缓存和虚拟环境
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# 忽略大型压缩包
+*.zip
+*.tar
+*.gz
+
+# 忽略模型权重文件 (GitHub 限制单文件最大 100MB)
+*.pt
+*.pth
+*.safetensors
+
+# 忽略临时数据或数据集文件夹
+to_Df/datasets/data*/
+to_Df/predictions.json
+demo_output_*.jpg
+
+# 忽略 IDE 相关配置
+.vscode/
+.idea/

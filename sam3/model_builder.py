@@ -114,6 +114,38 @@ def _read_image_model_build_config(model_config_path: Optional[str]) -> dict[str
     return config
 
 
+def _uses_default_image_model_build(current_config: dict[str, Any]) -> bool:
+    return all(
+        current_config[name] == DEFAULT_IMAGE_MODEL_BUILD_CONFIG[name]
+        for name in (
+            "image_size",
+            "patch_size",
+            "pretrain_img_size",
+            "vit_embed_dim",
+            "vit_depth",
+            "vit_num_heads",
+            "vit_mlp_ratio",
+            "vit_drop_path_rate",
+            "vit_global_att_blocks",
+            "vit_window_size",
+            "d_model",
+            "transformer_heads",
+            "encoder_layers",
+            "decoder_layers",
+            "transformer_ffn_dim",
+            "encoder_dropout",
+            "decoder_dropout",
+            "num_queries",
+            "geo_encoder_layers",
+            "text_width",
+            "text_layers",
+            "text_heads",
+            "prompt_mlp_hidden_dim",
+            "segmentation_upsampling_stages",
+        )
+    )
+
+
 def _create_position_encoding(
     d_model: int = 256, precompute_resolution: Optional[int] = None
 ):
@@ -908,37 +940,33 @@ def build_sam3_image_model(
     if freeze_geometry_encoder:
         _freeze_module(input_geometry_encoder)
 
-    uses_default_architecture = (
-        image_size == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["image_size"]
-        and patch_size == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["patch_size"]
-        and pretrain_img_size == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["pretrain_img_size"]
-        and vit_embed_dim == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["vit_embed_dim"]
-        and vit_depth == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["vit_depth"]
-        and vit_num_heads == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["vit_num_heads"]
-        and vit_mlp_ratio == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["vit_mlp_ratio"]
-        and vit_drop_path_rate
-        == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["vit_drop_path_rate"]
-        and _normalize_blocks(vit_global_att_blocks)
-        == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["vit_global_att_blocks"]
-        and vit_window_size == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["vit_window_size"]
-        and d_model == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["d_model"]
-        and transformer_heads == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["transformer_heads"]
-        and encoder_layers == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["encoder_layers"]
-        and decoder_layers == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["decoder_layers"]
-        and transformer_ffn_dim
-        == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["transformer_ffn_dim"]
-        and encoder_dropout == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["encoder_dropout"]
-        and decoder_dropout == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["decoder_dropout"]
-        and num_queries == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["num_queries"]
-        and geo_encoder_layers == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["geo_encoder_layers"]
-        and text_width == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["text_width"]
-        and text_layers == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["text_layers"]
-        and text_heads == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["text_heads"]
-        and prompt_mlp_hidden_dim
-        == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["prompt_mlp_hidden_dim"]
-        and segmentation_upsampling_stages
-        == DEFAULT_IMAGE_MODEL_BUILD_CONFIG["segmentation_upsampling_stages"]
-    )
+    current_build_config = {
+        "image_size": image_size,
+        "patch_size": patch_size,
+        "pretrain_img_size": pretrain_img_size,
+        "vit_embed_dim": vit_embed_dim,
+        "vit_depth": vit_depth,
+        "vit_num_heads": vit_num_heads,
+        "vit_mlp_ratio": vit_mlp_ratio,
+        "vit_drop_path_rate": vit_drop_path_rate,
+        "vit_global_att_blocks": _normalize_blocks(vit_global_att_blocks),
+        "vit_window_size": vit_window_size,
+        "d_model": d_model,
+        "transformer_heads": transformer_heads,
+        "encoder_layers": encoder_layers,
+        "decoder_layers": decoder_layers,
+        "transformer_ffn_dim": transformer_ffn_dim,
+        "encoder_dropout": encoder_dropout,
+        "decoder_dropout": decoder_dropout,
+        "num_queries": num_queries,
+        "geo_encoder_layers": geo_encoder_layers,
+        "text_width": text_width,
+        "text_layers": text_layers,
+        "text_heads": text_heads,
+        "prompt_mlp_hidden_dim": prompt_mlp_hidden_dim,
+        "segmentation_upsampling_stages": segmentation_upsampling_stages,
+    }
+    uses_default_architecture = _uses_default_image_model_build(current_build_config)
     if load_from_HF and checkpoint_path is None and not uses_default_architecture:
         raise ValueError(
             "Custom SAM3 image architectures require an explicit checkpoint_path or "

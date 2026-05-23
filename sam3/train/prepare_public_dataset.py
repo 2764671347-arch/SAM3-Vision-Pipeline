@@ -63,7 +63,14 @@ def normalize_aliases(alias_data):
     normalized = {}
     for key, value in alias_data.items():
         values = [value] if isinstance(value, str) else list(value)
-        values = [item.strip() for item in values if isinstance(item, str) and item.strip()]
+        cleaned_values = []
+        for item in values:
+            if not isinstance(item, str):
+                continue
+            stripped = item.strip()
+            if stripped:
+                cleaned_values.append(stripped)
+        values = cleaned_values
         if values:
             normalized[str(key)] = list(dict.fromkeys(values))
     return normalized

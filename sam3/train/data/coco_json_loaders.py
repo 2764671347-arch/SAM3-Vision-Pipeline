@@ -175,7 +175,14 @@ class COCO_FROM_JSON:
                 prompt_list = [prompt_values]
             else:
                 prompt_list = [prompt for prompt in prompt_values if prompt]
-            prompt_list = list(dict.fromkeys(prompt_list))
+            deduplicated_prompts = []
+            seen_prompts = set()
+            for prompt in prompt_list:
+                if prompt in seen_prompts:
+                    continue
+                seen_prompts.add(prompt)
+                deduplicated_prompts.append(prompt)
+            prompt_list = deduplicated_prompts
             assert len(prompt_list) > 0, f"No prompt text found for category {cat_id}"
             parsed_prompts[int(cat_id)] = prompt_list
         return parsed_prompts

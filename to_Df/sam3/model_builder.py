@@ -108,6 +108,11 @@ def _read_image_model_build_config(model_config_path: Optional[str]) -> dict[str
     if not isinstance(config, dict):
         raise ValueError("model build config must be a JSON object")
     if "build_args" in config:
+        if len(config) != 1:
+            raise ValueError(
+                "model build config must use either top-level build keys or a single "
+                "'build_args' object, not both."
+            )
         config = config["build_args"]
     if not isinstance(config, dict):
         raise ValueError("model build config build_args must be a JSON object")

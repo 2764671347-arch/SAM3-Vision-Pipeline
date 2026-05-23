@@ -168,6 +168,10 @@ class COCO_FROM_JSON:
                     or loc_dict.get("prompts")
                     or loc_dict.get("name")
                 )
+                if prompt_values is None:
+                    raise ValueError(
+                        "Each prompt entry must contain one of: names, prompts, name"
+                    )
                 iterator.append((loc_dict["id"], prompt_values))
 
         for cat_id, prompt_values in iterator:

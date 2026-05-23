@@ -46,12 +46,18 @@ def load_model(checkpoint_path: Optional[str], build_config_path: Optional[str])
     build_kwargs: Dict[str, Any] = {}
     if build_config_path and Path(build_config_path).exists():
         build_kwargs["model_config_path"] = build_config_path
-    if checkpoint_path and Path(checkpoint_path).exists():
-        model = build_sam3_image_model(
-            checkpoint_path=checkpoint_path, device=DEVICE, **build_kwargs
-        )
-    else:
-        model = build_sam3_image_model(device=DEVICE, **build_kwargs)
+    try:
+        if checkpoint_path and Path(checkpoint_path).exists():
+            model = build_sam3_image_model(
+                checkpoint_path=checkpoint_path, device=DEVICE, **build_kwargs
+            )
+        else:
+            model = build_sam3_image_model(device=DEVICE, **build_kwargs)
+    except Exception as exc:
+        raise RuntimeError(
+            f"模型加载失败，请检查权重或构建配置: checkpoint={checkpoint_path}, "
+            f"build_config={build_config_path}"
+        ) from exc
     processor = Sam3Processor(model=model, device=DEVICE)
     return model, processor
 

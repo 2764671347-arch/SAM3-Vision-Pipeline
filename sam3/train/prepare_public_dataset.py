@@ -147,7 +147,10 @@ def main():
         if area <= 0.0:
             bbox = annotation.get("bbox") or [0, 0, 0, 0]
             if len(bbox) == 4:
-                area = float(max(bbox[2], 0.0) * max(bbox[3], 0.0))
+                bbox_width = float(bbox[2])
+                bbox_height = float(bbox[3])
+                if bbox_width > 0.0 and bbox_height > 0.0:
+                    area = float(bbox_width * bbox_height)
         if area < args.min_area:
             continue
 
@@ -161,6 +164,7 @@ def main():
         images = [image for image in images if image["id"] in kept_image_ids]
 
     if args.remap_category_ids:
+        # COCO category ids are conventionally 1-indexed, so we keep that layout after filtering.
         remap = {category["id"]: index for index, category in enumerate(categories, start=1)}
         remapped_categories = []
         for category in categories:

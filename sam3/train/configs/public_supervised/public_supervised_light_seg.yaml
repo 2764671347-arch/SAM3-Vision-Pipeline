@@ -188,7 +188,7 @@ scratch:
   vit_num_heads: 12
   vit_mlp_ratio: 4.0
   vit_drop_path_rate: 0.1
-  vit_global_att_blocks: [3, 7, 11, 15]
+  vit_global_att_blocks: [3, 7, 11, 15] # normalized to an int tuple by the builder
   vit_window_size: 16
   text_width: 768
   text_layers: 12

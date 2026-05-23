@@ -295,7 +295,7 @@ trainer:
   model:
     _target_: sam3.model_builder.build_sam3_image_model
     bpe_path: ${paths.bpe_path}
-    device: cpus
+    device: cpu
     eval_mode: false
     checkpoint_path: ${paths.checkpoint_path}
     load_from_HF: false

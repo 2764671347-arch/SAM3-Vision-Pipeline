@@ -35,17 +35,29 @@ DEFAULT_TASKS = "/raytron/test/test_tasks.json"
 DEFAULT_IMAGE_ROOT = "/raytron/test/"
 DEFAULT_OUTPUT_PATH = "/raytron/test/predictions.json"
 DEFAULT_CHECKPOINT_PATH = "/raytron/code/model/sam3.pt"
+DEFAULT_BUILD_CONFIG_PATH = "/raytron/code/model/sam3_build_config.json"
 DEFAULT_CONF_THRESHOLD = 0.01
 
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 
-def load_model(checkpoint_path: Optional[str]):
-    if checkpoint_path and Path(checkpoint_path).exists():
-        model = build_sam3_image_model(checkpoint_path=checkpoint_path, device=DEVICE)
-    else:
-        model = build_sam3_image_model(device=DEVICE)
+def load_model(checkpoint_path: Optional[str], build_config_path: Optional[str]):
+    build_kwargs: Dict[str, Any] = {}
+    if build_config_path and Path(build_config_path).exists():
+        build_kwargs["model_config_path"] = build_config_path
+    try:
+        if checkpoint_path and Path(checkpoint_path).exists():
+            model = build_sam3_image_model(
+                checkpoint_path=checkpoint_path, device=DEVICE, **build_kwargs
+            )
+        else:
+            model = build_sam3_image_model(device=DEVICE, **build_kwargs)
+    except Exception as exc:
+        raise RuntimeError(
+            f"模型加载失败，请检查权重或构建配置: checkpoint={checkpoint_path}, "
+            f"build_config={build_config_path}"
+        ) from exc
     processor = Sam3Processor(model=model, device=DEVICE)
     return model, processor
 
@@ -198,7 +210,7 @@ def process_tasks(
     output_path_obj = Path(output_path)
     output_path_obj.parent.mkdir(parents=True, exist_ok=True)
 
-    model, processor = load_model(checkpoint_path)
+    model, processor = load_model(checkpoint_path, DEFAULT_BUILD_CONFIG_PATH)
     model_info = count_model_params(model)
     if checkpoint_path:
         model_info["checkpoint_path"] = checkpoint_path
@@ -296,6 +308,7 @@ def main() -> None:
     print(f"图片根目录: {DEFAULT_IMAGE_ROOT}")
     print(f"输出路径: {DEFAULT_OUTPUT_PATH}")
     print(f"模型检查点: {DEFAULT_CHECKPOINT_PATH}")
+    print(f"模型构建配置: {DEFAULT_BUILD_CONFIG_PATH}")
     print(f"置信度阈值: {DEFAULT_CONF_THRESHOLD}")
     print(f"设备: {DEVICE}")
     print("=" * 60)

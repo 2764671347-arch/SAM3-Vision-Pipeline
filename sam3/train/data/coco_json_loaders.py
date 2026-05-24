@@ -1,6 +1,9 @@
 # Copyright (c) Meta Platforms, Inc. and affiliates. All Rights Reserved
 
+import ast
 import json
+import os
+import random
 from collections import defaultdict
 from typing import Dict, List, Tuple
 
@@ -111,6 +114,7 @@ class COCO_FROM_JSON:
         prompts=None,
         include_negatives=True,
         category_chunk_size=None,
+        randomize_prompt=False,
     ):
         """
         Initialize the COCO training API.
@@ -126,6 +130,7 @@ class COCO_FROM_JSON:
         self._sorted_cat_ids = sorted(list(self._cat_idx_to_text.keys()))
         self.prompts = None
         self.include_negatives = include_negatives
+        self.randomize_prompt = randomize_prompt
         self.category_chunk_size = (
             category_chunk_size
             if category_chunk_size is not None
@@ -136,13 +141,63 @@ class COCO_FROM_JSON:
             for i in range(0, len(self._sorted_cat_ids), self.category_chunk_size)
         ]
         if prompts is not None:
-            prompts = eval(prompts)
-            self.prompts = {}
-            for loc_dict in prompts:
-                self.prompts[int(loc_dict["id"])] = loc_dict["name"]
+            self.prompts = self._parse_prompts(prompts)
             assert len(self.prompts) == len(
                 self._sorted_cat_ids
             ), "Number of prompts must match number of categories"
+
+    def _parse_prompts(self, prompts):
+        if isinstance(prompts, str):
+            if os.path.exists(prompts):
+                with open(prompts, "r") as fopen:
+                    prompts = json.load(fopen)
+            else:
+                try:
+                    prompts = json.loads(prompts)
+                except json.JSONDecodeError:
+                    prompts = ast.literal_eval(prompts)
+
+        parsed_prompts = {}
+        if isinstance(prompts, dict):
+            iterator = prompts.items()
+        else:
+            iterator = []
+            for loc_dict in prompts:
+                prompt_values = (
+                    loc_dict.get("names")
+                    or loc_dict.get("prompts")
+                    or loc_dict.get("name")
+                )
+                if prompt_values is None:
+                    raise ValueError(
+                        "Each prompt entry must contain one of: names, prompts, name"
+                    )
+                iterator.append((loc_dict["id"], prompt_values))
+
+        for cat_id, prompt_values in iterator:
+            if isinstance(prompt_values, str):
+                prompt_list = [prompt_values]
+            else:
+                prompt_list = [prompt for prompt in prompt_values if prompt]
+            deduplicated_prompts = []
+            seen_prompts = set()
+            for prompt in prompt_list:
+                if prompt in seen_prompts:
+                    continue
+                seen_prompts.add(prompt)
+                deduplicated_prompts.append(prompt)
+            prompt_list = deduplicated_prompts
+            assert len(prompt_list) > 0, f"No prompt text found for category {cat_id}"
+            parsed_prompts[int(cat_id)] = prompt_list
+        return parsed_prompts
+
+    def _get_query_text(self, cat_id: int) -> str:
+        if self.prompts is None:
+            return self._cat_idx_to_text[cat_id]
+        prompt_options = self.prompts[cat_id]
+        if self.randomize_prompt:
+            return random.choice(prompt_options)
+        return prompt_options[0]
 
     def getDatapointIds(self):
         """Return all datapoint indices for training."""
@@ -240,11 +295,7 @@ class COCO_FROM_JSON:
             query = query_template.copy()
             query["id"] = len(queries)
             query["original_cat_id"] = cat_id
-            query["query_text"] = (
-                self._cat_idx_to_text[cat_id]
-                if self.prompts is None
-                else self.prompts[cat_id]
-            )
+            query["query_text"] = self._get_query_text(cat_id)
             query["object_ids_output"] = cur_ann_ids
             queries.append(query)
 

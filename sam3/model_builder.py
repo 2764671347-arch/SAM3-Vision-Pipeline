@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
+import json
 import os
-from typing import Optional
+from typing import Any, Optional, Sequence
 
 import torch
 import torch.nn as nn
@@ -53,10 +54,109 @@ def _setup_tf32() -> None:
 _setup_tf32()
 
 
-def _create_position_encoding(precompute_resolution=None):
+DEFAULT_IMAGE_MODEL_BUILD_CONFIG = {
+    "image_size": 1008,
+    "patch_size": 14,
+    "pretrain_img_size": 336,
+    "vit_embed_dim": 1024,
+    "vit_depth": 32,
+    "vit_num_heads": 16,
+    "vit_mlp_ratio": 4.625,
+    "vit_drop_path_rate": 0.1,
+    "vit_global_att_blocks": (7, 15, 23, 31),
+    "vit_window_size": 24,
+    "d_model": 256,
+    "transformer_heads": 8,
+    "encoder_layers": 6,
+    "decoder_layers": 6,
+    "transformer_ffn_dim": 2048,
+    "encoder_dropout": 0.1,
+    "decoder_dropout": 0.1,
+    "num_queries": 200,
+    "geo_encoder_layers": 3,
+    "text_width": 1024,
+    "text_layers": 24,
+    "text_heads": 16,
+    "prompt_mlp_hidden_dim": 2048,
+    "segmentation_upsampling_stages": 3,
+    "freeze_image_tower": False,
+    "freeze_text_tower": False,
+    "freeze_transformer": False,
+    "freeze_prompt_scorer": False,
+    "freeze_segmentation_head": False,
+    "freeze_geometry_encoder": False,
+}
+
+
+def _normalize_blocks(blocks: Sequence[int]) -> tuple[int, ...]:
+    return tuple(int(block) for block in blocks)
+
+
+def _freeze_module(module: Optional[nn.Module]) -> None:
+    if module is None:
+        return
+    module.eval()
+    for parameter in module.parameters():
+        parameter.requires_grad = False
+
+
+def _read_image_model_build_config(model_config_path: Optional[str]) -> dict[str, Any]:
+    if model_config_path is None:
+        return {}
+    with g_pathmgr.open(model_config_path, "r") as fopen:
+        config = json.load(fopen)
+    if not isinstance(config, dict):
+        raise ValueError("model build config must be a JSON object")
+    if "build_args" in config:
+        if len(config) != 1:
+            raise ValueError(
+                "model build config must use either top-level build keys or a single "
+                "'build_args' object, not both."
+            )
+        config = config["build_args"]
+    if not isinstance(config, dict):
+        raise ValueError("model build config build_args must be a JSON object")
+    return config
+
+
+def _uses_default_image_model_build(current_config: dict[str, Any]) -> bool:
+    return all(
+        current_config[name] == DEFAULT_IMAGE_MODEL_BUILD_CONFIG[name]
+        for name in (
+            "image_size",
+            "patch_size",
+            "pretrain_img_size",
+            "vit_embed_dim",
+            "vit_depth",
+            "vit_num_heads",
+            "vit_mlp_ratio",
+            "vit_drop_path_rate",
+            "vit_global_att_blocks",
+            "vit_window_size",
+            "d_model",
+            "transformer_heads",
+            "encoder_layers",
+            "decoder_layers",
+            "transformer_ffn_dim",
+            "encoder_dropout",
+            "decoder_dropout",
+            "num_queries",
+            "geo_encoder_layers",
+            "text_width",
+            "text_layers",
+            "text_heads",
+            "prompt_mlp_hidden_dim",
+            "segmentation_upsampling_stages",
+        )
+    )
+
+
+def _create_position_encoding(
+    d_model: int = 256, precompute_resolution: Optional[int] = None
+):
     """Create position encoding for visual backbone."""
     return PositionEmbeddingSine(
-        num_pos_feats=256,
+        num_pos_feats=d_model,
         normalize=True,
         scale=None,
         temperature=10000,
@@ -64,26 +164,38 @@ def _create_position_encoding(precompute_resolution=None):
     )
 
 
-def _create_vit_backbone(compile_mode=None):
+def _create_vit_backbone(
+    image_size: int = 1008,
+    patch_size: int = 14,
+    pretrain_img_size: int = 336,
+    embed_dim: int = 1024,
+    depth: int = 32,
+    num_heads: int = 16,
+    mlp_ratio: float = 4.625,
+    drop_path_rate: float = 0.1,
+    global_att_blocks: Sequence[int] = (7, 15, 23, 31),
+    window_size: int = 24,
+    compile_mode=None,
+):
     """Create ViT backbone for visual feature extraction."""
     return ViT(
-        img_size=1008,
-        pretrain_img_size=336,
-        patch_size=14,
-        embed_dim=1024,
-        depth=32,
-        num_heads=16,
-        mlp_ratio=4.625,
+        img_size=image_size,
+        pretrain_img_size=pretrain_img_size,
+        patch_size=patch_size,
+        embed_dim=embed_dim,
+        depth=depth,
+        num_heads=num_heads,
+        mlp_ratio=mlp_ratio,
         norm_layer="LayerNorm",
-        drop_path_rate=0.1,
+        drop_path_rate=drop_path_rate,
         qkv_bias=True,
         use_abs_pos=True,
         tile_abs_pos=True,
-        global_att_blocks=(7, 15, 23, 31),
+        global_att_blocks=_normalize_blocks(global_att_blocks),
         rel_pos_blocks=(),
         use_rope=True,
         use_interp_rope=True,
-        window_size=24,
+        window_size=window_size,
         pretrain_use_cls_token=True,
         retain_cls_token=False,
         ln_pre=True,
@@ -94,11 +206,16 @@ def _create_vit_backbone(compile_mode=None):
     )
 
 
-def _create_vit_neck(position_encoding, vit_backbone, enable_inst_interactivity=False):
+def _create_vit_neck(
+    position_encoding,
+    vit_backbone,
+    d_model: int = 256,
+    enable_inst_interactivity: bool = False,
+):
     """Create ViT neck for feature pyramid."""
     return Sam3DualViTDetNeck(
         position_encoding=position_encoding,
-        d_model=256,
+        d_model=d_model,
         scale_factors=[4.0, 2.0, 1.0, 0.5],
         trunk=vit_backbone,
         add_sam2_neck=enable_inst_interactivity,
@@ -110,130 +227,165 @@ def _create_vl_backbone(vit_neck, text_encoder):
     return SAM3VLBackbone(visual=vit_neck, text=text_encoder, scalp=1)
 
 
-def _create_transformer_encoder() -> TransformerEncoderFusion:
+def _create_transformer_encoder(
+    d_model: int = 256,
+    transformer_heads: int = 8,
+    encoder_layers: int = 6,
+    transformer_ffn_dim: int = 2048,
+    encoder_dropout: float = 0.1,
+    use_act_checkpoint: bool = True,
+) -> TransformerEncoderFusion:
     """Create transformer encoder with its layer."""
     encoder_layer = TransformerEncoderLayer(
         activation="relu",
-        d_model=256,
-        dim_feedforward=2048,
-        dropout=0.1,
+        d_model=d_model,
+        dim_feedforward=transformer_ffn_dim,
+        dropout=encoder_dropout,
         pos_enc_at_attn=True,
         pos_enc_at_cross_attn_keys=False,
         pos_enc_at_cross_attn_queries=False,
         pre_norm=True,
         self_attention=MultiheadAttention(
-            num_heads=8,
-            dropout=0.1,
-            embed_dim=256,
+            num_heads=transformer_heads,
+            dropout=encoder_dropout,
+            embed_dim=d_model,
             batch_first=True,
         ),
         cross_attention=MultiheadAttention(
-            num_heads=8,
-            dropout=0.1,
-            embed_dim=256,
+            num_heads=transformer_heads,
+            dropout=encoder_dropout,
+            embed_dim=d_model,
             batch_first=True,
         ),
     )
 
     encoder = TransformerEncoderFusion(
         layer=encoder_layer,
-        num_layers=6,
-        d_model=256,
+        num_layers=encoder_layers,
+        d_model=d_model,
         num_feature_levels=1,
         frozen=False,
-        use_act_checkpoint=True,
+        use_act_checkpoint=use_act_checkpoint,
         add_pooled_text_to_img_feat=False,
         pool_text_with_mask=True,
     )
     return encoder
 
 
-def _create_transformer_decoder() -> TransformerDecoder:
+def _create_transformer_decoder(
+    d_model: int = 256,
+    transformer_heads: int = 8,
+    decoder_layers: int = 6,
+    num_queries: int = 200,
+    transformer_ffn_dim: int = 2048,
+    decoder_dropout: float = 0.1,
+    image_size: int = 1008,
+    patch_size: int = 14,
+    use_act_checkpoint: bool = True,
+    has_presence_token: bool = True,
+) -> TransformerDecoder:
     """Create transformer decoder with its layer."""
     decoder_layer = TransformerDecoderLayer(
         activation="relu",
-        d_model=256,
-        dim_feedforward=2048,
-        dropout=0.1,
+        d_model=d_model,
+        dim_feedforward=transformer_ffn_dim,
+        dropout=decoder_dropout,
         cross_attention=MultiheadAttention(
-            num_heads=8,
-            dropout=0.1,
-            embed_dim=256,
+            num_heads=transformer_heads,
+            dropout=decoder_dropout,
+            embed_dim=d_model,
         ),
-        n_heads=8,
+        n_heads=transformer_heads,
         use_text_cross_attention=True,
     )
 
     decoder = TransformerDecoder(
         layer=decoder_layer,
-        num_layers=6,
-        num_queries=200,
+        num_layers=decoder_layers,
+        num_queries=num_queries,
         return_intermediate=True,
         box_refine=True,
         num_o2m_queries=0,
         dac=True,
         boxRPB="log",
-        d_model=256,
+        d_model=d_model,
         frozen=False,
         interaction_layer=None,
         dac_use_selfatt_ln=True,
-        resolution=1008,
-        stride=14,
-        use_act_checkpoint=True,
-        presence_token=True,
+        resolution=image_size,
+        stride=patch_size,
+        use_act_checkpoint=use_act_checkpoint,
+        presence_token=has_presence_token,
     )
     return decoder
 
 
-def _create_dot_product_scoring():
+def _create_dot_product_scoring(
+    d_model: int = 256,
+    prompt_mlp_hidden_dim: int = 2048,
+    dropout: float = 0.1,
+):
     """Create dot product scoring module."""
     prompt_mlp = MLP(
-        input_dim=256,
-        hidden_dim=2048,
-        output_dim=256,
+        input_dim=d_model,
+        hidden_dim=prompt_mlp_hidden_dim,
+        output_dim=d_model,
         num_layers=2,
-        dropout=0.1,
+        dropout=dropout,
         residual=True,
-        out_norm=nn.LayerNorm(256),
+        out_norm=nn.LayerNorm(d_model),
     )
-    return DotProductScoring(d_model=256, d_proj=256, prompt_mlp=prompt_mlp)
+    return DotProductScoring(d_model=d_model, d_proj=d_model, prompt_mlp=prompt_mlp)
 
 
-def _create_segmentation_head(compile_mode=None):
+def _create_segmentation_head(
+    d_model: int = 256,
+    upsampling_stages: int = 3,
+    transformer_heads: int = 8,
+    compile_mode=None,
+    use_act_checkpoint: bool = True,
+):
     """Create segmentation head with pixel decoder."""
     pixel_decoder = PixelDecoder(
-        num_upsampling_stages=3,
+        num_upsampling_stages=upsampling_stages,
         interpolation_mode="nearest",
-        hidden_dim=256,
+        hidden_dim=d_model,
         compile_mode=compile_mode,
     )
 
     cross_attend_prompt = MultiheadAttention(
-        num_heads=8,
+        num_heads=transformer_heads,
         dropout=0,
-        embed_dim=256,
+        embed_dim=d_model,
     )
 
     segmentation_head = UniversalSegmentationHead(
-        hidden_dim=256,
-        upsampling_stages=3,
+        hidden_dim=d_model,
+        upsampling_stages=upsampling_stages,
         aux_masks=False,
         presence_head=False,
         dot_product_scorer=None,
-        act_ckpt=True,
+        act_ckpt=use_act_checkpoint,
         cross_attend_prompt=cross_attend_prompt,
         pixel_decoder=pixel_decoder,
     )
     return segmentation_head
 
 
-def _create_geometry_encoder():
+def _create_geometry_encoder(
+    d_model: int = 256,
+    transformer_heads: int = 8,
+    transformer_ffn_dim: int = 2048,
+    encoder_dropout: float = 0.1,
+    geo_encoder_layers: int = 3,
+    use_act_checkpoint: bool = True,
+):
     """Create geometry encoder with all its components."""
     # Create position encoding for geometry encoder
-    geo_pos_enc = _create_position_encoding()
+    geo_pos_enc = _create_position_encoding(d_model=d_model)
     # Create CX block for fuser
     cx_block = CXBlock(
-        dim=256,
+        dim=d_model,
         kernel_size=7,
         padding=3,
         layer_scale_init_value=1.0e-06,
@@ -242,23 +394,23 @@ def _create_geometry_encoder():
     # Create geometry encoder layer
     geo_layer = TransformerEncoderLayer(
         activation="relu",
-        d_model=256,
-        dim_feedforward=2048,
-        dropout=0.1,
+        d_model=d_model,
+        dim_feedforward=transformer_ffn_dim,
+        dropout=encoder_dropout,
         pos_enc_at_attn=False,
         pre_norm=True,
         self_attention=MultiheadAttention(
-            num_heads=8,
-            dropout=0.1,
-            embed_dim=256,
+            num_heads=transformer_heads,
+            dropout=encoder_dropout,
+            embed_dim=d_model,
             batch_first=False,
         ),
         pos_enc_at_cross_attn_queries=False,
         pos_enc_at_cross_attn_keys=True,
         cross_attention=MultiheadAttention(
-            num_heads=8,
-            dropout=0.1,
-            embed_dim=256,
+            num_heads=transformer_heads,
+            dropout=encoder_dropout,
+            embed_dim=d_model,
             batch_first=False,
         ),
     )
@@ -273,10 +425,10 @@ def _create_geometry_encoder():
         boxes_direct_project=True,
         boxes_pool=True,
         boxes_pos_enc=True,
-        d_model=256,
-        num_layers=3,
+        d_model=d_model,
+        num_layers=geo_encoder_layers,
         layer=geo_layer,
-        use_act_ckpt=True,
+        use_act_ckpt=use_act_checkpoint,
         add_cls=True,
         add_post_encode_proj=True,
     )
@@ -482,41 +634,105 @@ def build_tracker(
     return model
 
 
-def _create_text_encoder(bpe_path: str) -> VETextEncoder:
+def _create_text_encoder(
+    bpe_path: str,
+    d_model: int = 256,
+    text_width: int = 1024,
+    text_layers: int = 24,
+    text_heads: int = 16,
+) -> VETextEncoder:
     """Create SAM3 text encoder."""
     tokenizer = SimpleTokenizer(bpe_path=bpe_path)
     return VETextEncoder(
         tokenizer=tokenizer,
-        d_model=256,
-        width=1024,
-        heads=16,
-        layers=24,
+        d_model=d_model,
+        width=text_width,
+        heads=text_heads,
+        layers=text_layers,
     )
 
 
 def _create_vision_backbone(
-    compile_mode=None, enable_inst_interactivity=True
+    image_size: int = 1008,
+    patch_size: int = 14,
+    pretrain_img_size: int = 336,
+    vit_embed_dim: int = 1024,
+    vit_depth: int = 32,
+    vit_num_heads: int = 16,
+    vit_mlp_ratio: float = 4.625,
+    vit_drop_path_rate: float = 0.1,
+    vit_global_att_blocks: Sequence[int] = (7, 15, 23, 31),
+    vit_window_size: int = 24,
+    d_model: int = 256,
+    compile_mode=None,
+    enable_inst_interactivity: bool = True,
 ) -> Sam3DualViTDetNeck:
     """Create SAM3 visual backbone with ViT and neck."""
     # Position encoding
-    position_encoding = _create_position_encoding(precompute_resolution=1008)
+    position_encoding = _create_position_encoding(
+        d_model=d_model, precompute_resolution=image_size
+    )
     # ViT backbone
-    vit_backbone: ViT = _create_vit_backbone(compile_mode=compile_mode)
+    vit_backbone: ViT = _create_vit_backbone(
+        image_size=image_size,
+        patch_size=patch_size,
+        pretrain_img_size=pretrain_img_size,
+        embed_dim=vit_embed_dim,
+        depth=vit_depth,
+        num_heads=vit_num_heads,
+        mlp_ratio=vit_mlp_ratio,
+        drop_path_rate=vit_drop_path_rate,
+        global_att_blocks=vit_global_att_blocks,
+        window_size=vit_window_size,
+        compile_mode=compile_mode,
+    )
     vit_neck: Sam3DualViTDetNeck = _create_vit_neck(
         position_encoding,
         vit_backbone,
+        d_model=d_model,
         enable_inst_interactivity=enable_inst_interactivity,
     )
     # Visual neck
     return vit_neck
 
 
-def _create_sam3_transformer(has_presence_token: bool = True) -> TransformerWrapper:
+def _create_sam3_transformer(
+    d_model: int = 256,
+    transformer_heads: int = 8,
+    encoder_layers: int = 6,
+    decoder_layers: int = 6,
+    transformer_ffn_dim: int = 2048,
+    encoder_dropout: float = 0.1,
+    decoder_dropout: float = 0.1,
+    num_queries: int = 200,
+    image_size: int = 1008,
+    patch_size: int = 14,
+    use_act_checkpoint: bool = True,
+    has_presence_token: bool = True,
+) -> TransformerWrapper:
     """Create SAM3 transformer encoder and decoder."""
-    encoder: TransformerEncoderFusion = _create_transformer_encoder()
-    decoder: TransformerDecoder = _create_transformer_decoder()
+    encoder: TransformerEncoderFusion = _create_transformer_encoder(
+        d_model=d_model,
+        transformer_heads=transformer_heads,
+        encoder_layers=encoder_layers,
+        transformer_ffn_dim=transformer_ffn_dim,
+        encoder_dropout=encoder_dropout,
+        use_act_checkpoint=use_act_checkpoint,
+    )
+    decoder: TransformerDecoder = _create_transformer_decoder(
+        d_model=d_model,
+        transformer_heads=transformer_heads,
+        decoder_layers=decoder_layers,
+        num_queries=num_queries,
+        transformer_ffn_dim=transformer_ffn_dim,
+        decoder_dropout=decoder_dropout,
+        image_size=image_size,
+        patch_size=patch_size,
+        use_act_checkpoint=use_act_checkpoint,
+        has_presence_token=has_presence_token,
+    )
 
-    return TransformerWrapper(encoder=encoder, decoder=decoder, d_model=256)
+    return TransformerWrapper(encoder=encoder, decoder=decoder, d_model=d_model)
 
 
 def _load_checkpoint(model, checkpoint_path):
@@ -561,7 +777,38 @@ def build_sam3_image_model(
     load_from_HF=True,
     enable_segmentation=True,
     enable_inst_interactivity=False,
+    model_config_path=None,
     compile=False,
+    image_size=1008,
+    patch_size=14,
+    pretrain_img_size=336,
+    vit_embed_dim=1024,
+    vit_depth=32,
+    vit_num_heads=16,
+    vit_mlp_ratio=4.625,
+    vit_drop_path_rate=0.1,
+    vit_global_att_blocks=(7, 15, 23, 31),
+    vit_window_size=24,
+    d_model=256,
+    transformer_heads=8,
+    encoder_layers=6,
+    decoder_layers=6,
+    transformer_ffn_dim=2048,
+    encoder_dropout=0.1,
+    decoder_dropout=0.1,
+    num_queries=200,
+    geo_encoder_layers=3,
+    text_width=1024,
+    text_layers=24,
+    text_heads=16,
+    prompt_mlp_hidden_dim=2048,
+    segmentation_upsampling_stages=3,
+    freeze_image_tower=False,
+    freeze_text_tower=False,
+    freeze_transformer=False,
+    freeze_prompt_scorer=False,
+    freeze_segmentation_head=False,
+    freeze_geometry_encoder=False,
 ):
     """
     Build SAM3 image model
@@ -573,6 +820,7 @@ def build_sam3_image_model(
         checkpoint_path: Optional path to model checkpoint
         enable_segmentation: Whether to enable segmentation head
         enable_inst_interactivity: Whether to enable instance interactivity (SAM 1 task)
+        model_config_path: Optional JSON config file with build arguments
         compile_mode: To enable compilation, set to "default"
 
     Returns:
@@ -582,33 +830,91 @@ def build_sam3_image_model(
         bpe_path = os.path.join(
             os.path.dirname(__file__), "..", "assets", "bpe_simple_vocab_16e6.txt.gz"
         )
+    if model_config_path is not None:
+        config_overrides = _read_image_model_build_config(model_config_path)
+        merged_kwargs = {
+            "bpe_path": bpe_path,
+            "device": device,
+            "eval_mode": eval_mode,
+            "checkpoint_path": checkpoint_path,
+            "load_from_HF": load_from_HF,
+            "enable_segmentation": enable_segmentation,
+            "enable_inst_interactivity": enable_inst_interactivity,
+            "compile": compile,
+        }
+        merged_kwargs.update(config_overrides)
+        return build_sam3_image_model(**merged_kwargs)
     # Create visual components
     compile_mode = "default" if compile else None
     vision_encoder = _create_vision_backbone(
-        compile_mode=compile_mode, enable_inst_interactivity=enable_inst_interactivity
+        image_size=image_size,
+        patch_size=patch_size,
+        pretrain_img_size=pretrain_img_size,
+        vit_embed_dim=vit_embed_dim,
+        vit_depth=vit_depth,
+        vit_num_heads=vit_num_heads,
+        vit_mlp_ratio=vit_mlp_ratio,
+        vit_drop_path_rate=vit_drop_path_rate,
+        vit_global_att_blocks=vit_global_att_blocks,
+        vit_window_size=vit_window_size,
+        d_model=d_model,
+        compile_mode=compile_mode,
+        enable_inst_interactivity=enable_inst_interactivity,
     )
 
     # Create text components
-    text_encoder = _create_text_encoder(bpe_path)
+    text_encoder = _create_text_encoder(
+        bpe_path=bpe_path,
+        d_model=d_model,
+        text_width=text_width,
+        text_layers=text_layers,
+        text_heads=text_heads,
+    )
 
     # Create visual-language backbone
     backbone = _create_vl_backbone(vision_encoder, text_encoder)
 
     # Create transformer components
-    transformer = _create_sam3_transformer()
+    transformer = _create_sam3_transformer(
+        d_model=d_model,
+        transformer_heads=transformer_heads,
+        encoder_layers=encoder_layers,
+        decoder_layers=decoder_layers,
+        transformer_ffn_dim=transformer_ffn_dim,
+        encoder_dropout=encoder_dropout,
+        decoder_dropout=decoder_dropout,
+        num_queries=num_queries,
+        image_size=image_size,
+        patch_size=patch_size,
+    )
 
     # Create dot product scoring
-    dot_prod_scoring = _create_dot_product_scoring()
+    dot_prod_scoring = _create_dot_product_scoring(
+        d_model=d_model,
+        prompt_mlp_hidden_dim=prompt_mlp_hidden_dim,
+        dropout=decoder_dropout,
+    )
 
     # Create segmentation head if enabled
     segmentation_head = (
-        _create_segmentation_head(compile_mode=compile_mode)
+        _create_segmentation_head(
+            d_model=d_model,
+            upsampling_stages=segmentation_upsampling_stages,
+            transformer_heads=transformer_heads,
+            compile_mode=compile_mode,
+        )
         if enable_segmentation
         else None
     )
 
     # Create geometry encoder
-    input_geometry_encoder = _create_geometry_encoder()
+    input_geometry_encoder = _create_geometry_encoder(
+        d_model=d_model,
+        transformer_heads=transformer_heads,
+        transformer_ffn_dim=transformer_ffn_dim,
+        encoder_dropout=encoder_dropout,
+        geo_encoder_layers=geo_encoder_layers,
+    )
     if enable_inst_interactivity:
         from sam3.model.sam1_task_predictor import SAM3InteractiveImagePredictor
 
@@ -626,6 +932,51 @@ def build_sam3_image_model(
         inst_predictor,
         eval_mode,
     )
+    if freeze_image_tower:
+        _freeze_module(backbone.vision_backbone)
+    if freeze_text_tower:
+        _freeze_module(backbone.language_backbone)
+    if freeze_transformer:
+        _freeze_module(transformer)
+    if freeze_prompt_scorer:
+        _freeze_module(dot_prod_scoring)
+    if freeze_segmentation_head:
+        _freeze_module(segmentation_head)
+    if freeze_geometry_encoder:
+        _freeze_module(input_geometry_encoder)
+
+    current_build_config = {
+        "image_size": image_size,
+        "patch_size": patch_size,
+        "pretrain_img_size": pretrain_img_size,
+        "vit_embed_dim": vit_embed_dim,
+        "vit_depth": vit_depth,
+        "vit_num_heads": vit_num_heads,
+        "vit_mlp_ratio": vit_mlp_ratio,
+        "vit_drop_path_rate": vit_drop_path_rate,
+        "vit_global_att_blocks": _normalize_blocks(vit_global_att_blocks),
+        "vit_window_size": vit_window_size,
+        "d_model": d_model,
+        "transformer_heads": transformer_heads,
+        "encoder_layers": encoder_layers,
+        "decoder_layers": decoder_layers,
+        "transformer_ffn_dim": transformer_ffn_dim,
+        "encoder_dropout": encoder_dropout,
+        "decoder_dropout": decoder_dropout,
+        "num_queries": num_queries,
+        "geo_encoder_layers": geo_encoder_layers,
+        "text_width": text_width,
+        "text_layers": text_layers,
+        "text_heads": text_heads,
+        "prompt_mlp_hidden_dim": prompt_mlp_hidden_dim,
+        "segmentation_upsampling_stages": segmentation_upsampling_stages,
+    }
+    uses_default_architecture = _uses_default_image_model_build(current_build_config)
+    if load_from_HF and checkpoint_path is None and not uses_default_architecture:
+        raise ValueError(
+            "Custom SAM3 image architectures require an explicit checkpoint_path or "
+            "load_from_HF=False."
+        )
     if load_from_HF and checkpoint_path is None:
         checkpoint_path = download_ckpt_from_hf()
     # Load checkpoint if provided
@@ -636,6 +987,15 @@ def build_sam3_image_model(
     model = _setup_device_and_mode(model, device, eval_mode)
 
     return model
+
+
+def build_sam3_image_model_from_config(
+    model_config_path: str,
+    **overrides,
+):
+    config = _read_image_model_build_config(model_config_path)
+    config.update(overrides)
+    return build_sam3_image_model(**config)
 
 
 def download_ckpt_from_hf():
